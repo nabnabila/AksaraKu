@@ -1,0 +1,93 @@
+:root {
+  --primary: #c6553b;
+  --bg: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: black;
+}
+
+/*navbar*/
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary);
+  padding: 1.4rem 7%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+.navbar .navbar-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+}
+.navbar .navbar-logo span {
+  color: var(--bg);
+}
+
+/*Media Queries*/
+/*laptop*/
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+/*tablet*/
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+/*laptop*/
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+/*Hero Section*/
+.hero {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../img/bg-hero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.hero .content {
+  padding: 1.4rem 7%;
+  max-width: 60rem;
+}
+.hero .content h1 {
+  font-size: 3.5em;
+  color: #000000;
+  text-shadow: 1px 1px 3px 3%;
+  line-height: 1.2;
+}
+.hero .content h1 span {
+  color: var(--primary);
+}
+.hero .content p {
+  font-size: 1.5em;
+  color: #000000;
+  text-shadow: 1px 1px 3px 3%;
+  line-height: 1.4;
+  font-weight: 300;
+}
