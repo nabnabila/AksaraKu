@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./Pages/Homepage";
 import AksaraNglegena from "./Pages/AksaraNglegena";
 import PasanganAksaraNglegena from "./Pages/PasanganAksaraNglegena";
@@ -46,123 +46,131 @@ import IsiKuis5E from "./Pages/IsiKuisSandhangan/IsiKuis5";
 function App() {
   return (
     <div>
-      <Routes>
-        <Route path="/" Component={HomePage} />
-        <Route path="/aksaranglegena" Component={AksaraNglegena} />
-        <Route
-          path="/pasanganaksaranglegena"
-          Component={PasanganAksaraNglegena}
-        />
-        <Route path="/aksaramurda" Component={AksaraMurda} />
-        <Route path="/pasanganaksaramurda" Component={PasanganAksaraMurda} />
-        <Route path="/sandhangan1" Component={Sandhangan} />
-        <Route path="/belajar1" Component={Belajar1} />
-        <Route path="/aksaranglegena/belajar1" Component={Belajar1} />
-        <Route path="/pasanganaksaranglegena/belajar2" Component={Belajar2} />
-        <Route path="/aksaramurda/belajar3" Component={Belajar3} />
-        <Route path="/pasanganaksaramurda/belajar4" Component={Belajar4} />
-        <Route path="/sandhangan/belajar5" Component={Belajar5} />
-        <Route path="/aksaranglegena/kuis1" Component={Kuis1} />
-        <Route path="/pasanganaksaranglegena/kuis2" Component={Kuis2} />
-        <Route path="/aksaramurda/kuis3" Component={Kuis3} />
-        <Route path="/pasanganaksaramurda/kuis4" Component={Kuis4} />
-        <Route path="/sandhangan/kuis5" Component={Kuis5} />
-        <Route
-          path="/aksaranglegena/kuis1/nggolekitembangnglegena"
-          Component={IsiKuis1A}
-        />
-        <Route
-          path="/pasanganaksaranglegena/kuis2/nggolekitembangpasangannglegena"
-          Component={IsiKuis1B}
-        />
-        <Route
-          path="/aksaramurda/kuis3/nggolekitembangmurda"
-          Component={IsiKuis1C}
-        />
-        <Route
-          path="/pasanganaksaramurda/kuis4/nggolekitembangpasanganmurda"
-          Component={IsiKuis1D}
-        />
-        <Route
-          path="/sandhangan/kuis5/nggolekitembangsandhangan"
-          Component={IsiKuis1E}
-        />
-        <Route
-          path="/aksaranglegena/kuis1/ngaturukaranglegena"
-          Component={IsiKuis2A}
-        />
-        <Route
-          path="/pasanganaksaranglegena/kuis2/ngaturukarapasangannglegena"
-          Component={IsiKuis2B}
-        />
-        <Route
-          path="/aksaramurda/kuis3/ngaturukaramurda"
-          Component={IsiKuis2C}
-        />
-        <Route
-          path="/pasanganaksaramurda/kuis4/ngaturukarapasanganmurda"
-          Component={IsiKuis2D}
-        />
-        <Route
-          path="/sandhangan/kuis5/ngaturukarasandhangan"
-          Component={IsiKuis2E}
-        />
-        <Route
-          path="/aksaranglegena/kuis1/utakatikgathuknglegena"
-          Component={IsiKuis3A}
-        />
+      <Router>
+        <Switch>
+          <Route path="/" Component={HomePage} />
+          <Route path="/aksaranglegena" Component={AksaraNglegena} />
+          <Route
+            path="/pasanganaksaranglegena"
+            Component={PasanganAksaraNglegena}
+          />
+          <Route path="/aksaramurda" Component={AksaraMurda} />
+          <Route path="/pasanganaksaramurda" Component={PasanganAksaraMurda} />
+          <Route path="/sandhangan1" Component={Sandhangan} />
+          <Route path="/belajar1" Component={Belajar1} />
+          <Route path="/aksaranglegena/belajar1" Component={Belajar1} />
+          <Route path="/pasanganaksaranglegena/belajar2" Component={Belajar2} />
+          <Route path="/aksaramurda/belajar3" Component={Belajar3} />
+          <Route path="/pasanganaksaramurda/belajar4" Component={Belajar4} />
+          <Route path="/sandhangan/belajar5" Component={Belajar5} />
+          <Route path="/aksaranglegena/kuis1" Component={Kuis1} />
+          <Route path="/pasanganaksaranglegena/kuis2" Component={Kuis2} />
+          <Route path="/aksaramurda/kuis3" Component={Kuis3} />
+          <Route path="/pasanganaksaramurda/kuis4" Component={Kuis4} />
+          <Route path="/sandhangan/kuis5" Component={Kuis5} />
+          <Route
+            path="/aksaranglegena/kuis1/nggolekitembangnglegena"
+            Component={IsiKuis1A}
+          />
+          <Route
+            path="/pasanganaksaranglegena/kuis2/nggolekitembangpasangannglegena"
+            Component={IsiKuis1B}
+          />
+          <Route
+            path="/aksaramurda/kuis3/nggolekitembangmurda"
+            Component={IsiKuis1C}
+          />
+          <Route
+            path="/pasanganaksaramurda/kuis4/nggolekitembangpasanganmurda"
+            Component={IsiKuis1D}
+          />
+          <Route
+            path="/sandhangan/kuis5/nggolekitembangsandhangan"
+            Component={IsiKuis1E}
+          />
+          <Route
+            path="/aksaranglegena/kuis1/ngaturukaranglegena"
+            Component={IsiKuis2A}
+          />
+          <Route
+            path="/pasanganaksaranglegena/kuis2/ngaturukarapasangannglegena"
+            Component={IsiKuis2B}
+          />
+          <Route
+            path="/aksaramurda/kuis3/ngaturukaramurda"
+            Component={IsiKuis2C}
+          />
+          <Route
+            path="/pasanganaksaramurda/kuis4/ngaturukarapasanganmurda"
+            Component={IsiKuis2D}
+          />
+          <Route
+            path="/sandhangan/kuis5/ngaturukarasandhangan"
+            Component={IsiKuis2E}
+          />
+          <Route
+            path="/aksaranglegena/kuis1/utakatikgathuknglegena"
+            Component={IsiKuis3A}
+          />
 
-        <Route
-          path="/pasanganaksaranglegena/kuis2/utakatikgathukpasangannglegena"
-          Component={IsiKuis3B}
-        />
-        <Route
-          path="/aksaramurda/kuis3/utakatikgathukmurda"
-          Component={IsiKuis3C}
-        />
-        <Route
-          path="/pasanganaksaramurda/kuis4/utakatikgathukpasanganmurda"
-          Component={IsiKuis3D}
-        />
-        <Route
-          path="/sandhangan/kuis5/utakatikgathuksandhangan"
-          Component={IsiKuis3E}
-        />
-        <Route
-          path="/aksaranglegena/kuis1/nyocokakegambarnglegena"
-          Component={IsiKuis4A}
-        />
-        <Route
-          path="/pasanganaksaranglegena/kuis2/nyocokakegambarpasangannglegena"
-          Component={IsiKuis4B}
-        />
-        <Route
-          path="/aksaramurda/kuis3/nyocokakegambarmurda"
-          Component={IsiKuis4C}
-        />
-        <Route
-          path="/pasanganaksaramurda/kuis4/nyocokakegambarpasanganmurda"
-          Component={IsiKuis4D}
-        />
-        <Route
-          path="/sandhangan/kuis5/nyocokakegambarsandhangan"
-          Component={IsiKuis4E}
-        />
-        <Route
-          path="/aksaranglegena/kuis1/nyocokakeswara"
-          Component={IsiKuis5A}
-        />
-        <Route
-          path="/pasanganaksaranglegena/kuis2/nyocokakeswara"
-          Component={IsiKuis5B}
-        />
-        <Route path="/aksaramurda/kuis3/nyocokakeswara" Component={IsiKuis5C} />
-        <Route
-          path="/pasanganaksaramurda/kuis4/nyocokakeswara"
-          Component={IsiKuis5D}
-        />
-        <Route path="/sandhangan/kuis5/nyocokakeswara" Component={IsiKuis5E} />
-      </Routes>
+          <Route
+            path="/pasanganaksaranglegena/kuis2/utakatikgathukpasangannglegena"
+            Component={IsiKuis3B}
+          />
+          <Route
+            path="/aksaramurda/kuis3/utakatikgathukmurda"
+            Component={IsiKuis3C}
+          />
+          <Route
+            path="/pasanganaksaramurda/kuis4/utakatikgathukpasanganmurda"
+            Component={IsiKuis3D}
+          />
+          <Route
+            path="/sandhangan/kuis5/utakatikgathuksandhangan"
+            Component={IsiKuis3E}
+          />
+          <Route
+            path="/aksaranglegena/kuis1/nyocokakegambarnglegena"
+            Component={IsiKuis4A}
+          />
+          <Route
+            path="/pasanganaksaranglegena/kuis2/nyocokakegambarpasangannglegena"
+            Component={IsiKuis4B}
+          />
+          <Route
+            path="/aksaramurda/kuis3/nyocokakegambarmurda"
+            Component={IsiKuis4C}
+          />
+          <Route
+            path="/pasanganaksaramurda/kuis4/nyocokakegambarpasanganmurda"
+            Component={IsiKuis4D}
+          />
+          <Route
+            path="/sandhangan/kuis5/nyocokakegambarsandhangan"
+            Component={IsiKuis4E}
+          />
+          <Route
+            path="/aksaranglegena/kuis1/nyocokakeswara"
+            Component={IsiKuis5A}
+          />
+          <Route
+            path="/pasanganaksaranglegena/kuis2/nyocokakeswara"
+            Component={IsiKuis5B}
+          />
+          <Route
+            path="/aksaramurda/kuis3/nyocokakeswara"
+            Component={IsiKuis5C}
+          />
+          <Route
+            path="/pasanganaksaramurda/kuis4/nyocokakeswara"
+            Component={IsiKuis5D}
+          />
+          <Route
+            path="/sandhangan/kuis5/nyocokakeswara"
+            Component={IsiKuis5E}
+          />
+        </Switch>
+      </Router>
     </div>
   );
 }
