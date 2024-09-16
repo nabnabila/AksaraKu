@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/AksaraKu/static/css/main.3d7e7db6.css",
-    "main.js": "/AksaraKu/static/js/main.302ef233.js",
+    "main.js": "/AksaraKu/static/js/main.629e8cc1.js",
     "static/js/453.dc2c3680.chunk.js": "/AksaraKu/static/js/453.dc2c3680.chunk.js",
     "static/media/wayangklithik.jpg": "/AksaraKu/static/media/wayangklithik.4de0ddafbf182ad3a34b.jpg",
     "static/media/bootstrap-icons.woff?": "/AksaraKu/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
@@ -207,11 +207,11 @@
     "static/media/co.mp3": "/AksaraKu/static/media/co.04aa564ec3ccd542bdef.mp3",
     "index.html": "/AksaraKu/index.html",
     "main.3d7e7db6.css.map": "/AksaraKu/static/css/main.3d7e7db6.css.map",
-    "main.302ef233.js.map": "/AksaraKu/static/js/main.302ef233.js.map",
+    "main.629e8cc1.js.map": "/AksaraKu/static/js/main.629e8cc1.js.map",
     "453.dc2c3680.chunk.js.map": "/AksaraKu/static/js/453.dc2c3680.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d7e7db6.css",
-    "static/js/main.302ef233.js"
+    "static/js/main.629e8cc1.js"
   ]
 }
