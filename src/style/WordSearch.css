@@ -1,0 +1,110 @@
+.wordsearch {
+  background: url("../assets/image/bg3.png");
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.wordsearch body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150vh;
+}
+
+.wordsearch h1 {
+  text-align: center;
+  color: #333;
+  padding-top: 100px;
+  font-size: 36px;
+}
+.wordsearch h2 {
+  text-align: center;
+  color: #333;
+  font-size: 22px;
+}
+
+.wordsearch-clues {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.wordsearch-clue {
+  margin: 0 10px;
+}
+
+.wordsearch-clue-image {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  width: 200px !important;
+}
+
+.wordsearch-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 20px;
+  grid-template-columns: repeat(var(--grid-size), 40px);
+  grid-template-rows: repeat(var(--grid-size), 40px);
+  justify-items: center;
+  margin: 0 auto;
+  overflow: auto;
+  width: max-content;
+}
+
+.wordseach-row {
+  display: contents;
+}
+
+.cell {
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cell.selected {
+  background-color: #c6553b;
+  border-color: #c6553b;
+}
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #c6553b;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.wordsearch button {
+  display: block;
+  margin: 5px auto;
+}
+
+button:hover {
+  background-color: #95a5a6;
+}
+
+.wordsearch-found-words {
+  text-align: center;
+}
