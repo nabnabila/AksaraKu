@@ -78,7 +78,7 @@ function NgaturUkara() {
           <img
             key={index}
             src={image.src}
-            alt={`Image ${index}`}
+            alt={`Ngatur Ukara Pasangan Murda ${index}`}
             onClick={() => handleImageClick(image)}
             className="image"
             style={{

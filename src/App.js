@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/Homepage";
 import AksaraNglegena from "./Pages/AksaraNglegena";
 import PasanganAksaraNglegena from "./Pages/PasanganAksaraNglegena";
@@ -47,7 +48,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Switch>
+        <Routes>
           <Route path="/" Component={HomePage} />
           <Route path="/aksaranglegena" Component={AksaraNglegena} />
           <Route
@@ -169,7 +170,7 @@ function App() {
             path="/sandhangan/kuis5/nyocokakeswara"
             Component={IsiKuis5E}
           />
-        </Switch>
+        </Routes>
       </Router>
     </div>
   );

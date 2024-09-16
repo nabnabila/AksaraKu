@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import gareng from "../../assets/image/kuis/gareng.png";
 import petruk from "../../assets/image/kuis/petruk.png";
@@ -13,89 +13,94 @@ const NggolekiTembang = () => {
     { word: "NAKULA", image: nakula },
   ];
 
-  const [gridSize, setGridSize] = useState(15);
+  const [gridSize] = useState(15);
   const [grid, setGrid] = useState([]);
   const [foundWords, setFoundWords] = useState([]);
   const [selectedCells, setSelectedCells] = useState([]);
-  const [clues, setClues] = useState(initialClues);
+  const [clues] = useState(initialClues);
   const navigate = useNavigate();
 
-  // Utility function to create an empty grid
-  const createEmptyGrid = () => {
-    return Array.from({ length: gridSize }, () =>
-      Array.from({ length: gridSize }, () => "")
-    );
-  };
+  const canPlaceWord = useCallback(
+    (word, row, col, direction, grid) => {
+      if (direction === 0 && col + word.length > gridSize) return false;
+      if (direction === 1 && row + word.length > gridSize) return false;
+      if (
+        direction === 2 &&
+        (row + word.length > gridSize || col + word.length > gridSize)
+      )
+        return false;
 
-  // Place words into the grid
-  const placeWordsInGrid = (grid) => {
-    clues.forEach((clue) => {
-      const word = clue.word;
-      let placed = false;
-      while (!placed) {
-        const direction = Math.floor(Math.random() * 3); // 0 = horizontal, 1 = vertical, 2 = diagonal
-        const row = Math.floor(Math.random() * gridSize);
-        const col = Math.floor(Math.random() * gridSize);
-
-        if (canPlaceWord(word, row, col, direction, grid)) {
-          placeWord(word, row, col, direction, grid);
-          placed = true;
+      for (let i = 0; i < word.length; i++) {
+        const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
+        const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
+        if (
+          grid[currentRow][currentCol] !== "" &&
+          grid[currentRow][currentCol] !== word[i]
+        ) {
+          return false;
         }
       }
-    });
-  };
+      return true;
+    },
+    [gridSize]
+  );
 
-  const canPlaceWord = (word, row, col, direction, grid) => {
-    if (direction === 0 && col + word.length > gridSize) return false;
-    if (direction === 1 && row + word.length > gridSize) return false;
-    if (
-      direction === 2 &&
-      (row + word.length > gridSize || col + word.length > gridSize)
-    )
-      return false;
-
-    for (let i = 0; i < word.length; i++) {
-      const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
-      const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
-      if (
-        grid[currentRow][currentCol] !== "" &&
-        grid[currentRow][currentCol] !== word[i]
-      ) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const placeWord = (word, row, col, direction, grid) => {
+  const placeWord = useCallback((word, row, col, direction, grid) => {
     for (let i = 0; i < word.length; i++) {
       const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
       const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
       grid[currentRow][currentCol] = word[i];
     }
-  };
+  }, []);
 
-  // Fill the remaining cells with random letters
-  const fillGridWithRandomLetters = (grid) => {
-    for (let row = 0; row < gridSize; row++) {
-      for (let col = 0; col < gridSize; col++) {
-        if (grid[row][col] === "") {
-          grid[row][col] = String.fromCharCode(
-            65 + Math.floor(Math.random() * 26)
-          );
+  const createEmptyGrid = useCallback(() => {
+    return Array.from({ length: gridSize }, () =>
+      Array.from({ length: gridSize }, () => "")
+    );
+  }, [gridSize]);
+
+  const placeWordsInGrid = useCallback(
+    (grid) => {
+      clues.forEach((clue) => {
+        const word = clue.word;
+        let placed = false;
+        while (!placed) {
+          const direction = Math.floor(Math.random() * 3); // 0 = horizontal, 1 = vertical, 2 = diagonal
+          const row = Math.floor(Math.random() * gridSize);
+          const col = Math.floor(Math.random() * gridSize);
+
+          if (canPlaceWord(word, row, col, direction, grid)) {
+            placeWord(word, row, col, direction, grid);
+            placed = true;
+          }
+        }
+      });
+    },
+    [clues, gridSize, canPlaceWord, placeWord]
+  );
+
+  const fillGridWithRandomLetters = useCallback(
+    (grid) => {
+      for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+          if (grid[row][col] === "") {
+            grid[row][col] = String.fromCharCode(
+              65 + Math.floor(Math.random() * 26)
+            );
+          }
         }
       }
-    }
-  };
+    },
+    [gridSize]
+  );
 
   useEffect(() => {
     const newGrid = createEmptyGrid();
     placeWordsInGrid(newGrid);
     fillGridWithRandomLetters(newGrid);
     setGrid(newGrid);
-  }, [clues, gridSize]);
+  }, [createEmptyGrid, placeWordsInGrid, fillGridWithRandomLetters]);
 
-  // Handle user selection of cells
   const handleCellClick = (row, col) => {
     const cellIndex = selectedCells.findIndex(
       (cell) => cell.row === row && cell.col === col
@@ -106,17 +111,14 @@ const NggolekiTembang = () => {
       newSelection.splice(cellIndex, 1);
       setSelectedCells(newSelection);
     } else {
-      // Add to selection
       setSelectedCells([...selectedCells, { row, col }]);
     }
   };
 
-  // Clear the current selection
   const clearSelection = () => {
     setSelectedCells([]);
   };
 
-  // Check if the selected cells form a valid word
   useEffect(() => {
     const selectedWord = selectedCells
       .map(({ row, col }) => grid[row][col])
@@ -124,10 +126,11 @@ const NggolekiTembang = () => {
     const foundClue = clues.find((clue) => clue.word === selectedWord);
 
     if (foundClue) {
-      setFoundWords([...foundWords, foundClue.word]);
+      setFoundWords((prevFoundWords) => [...prevFoundWords, foundClue.word]);
       setSelectedCells([]);
     }
-  }, [selectedCells]);
+  }, [selectedCells, grid, clues]);
+
   const allWordsFound = foundWords.length === clues.length;
 
   const goToNextPage = () => {

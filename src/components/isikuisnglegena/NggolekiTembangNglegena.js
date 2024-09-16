@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import alur from "../../assets/image/kuis/alur.png";
 import tema from "../../assets/image/kuis/tema.png";
@@ -13,85 +13,93 @@ const NggolekiTembang = () => {
     { word: "LATAR", image: latar },
   ];
 
-  const [gridSize, setGridSize] = useState(15);
+  const [gridSize] = useState(15);
   const [grid, setGrid] = useState([]);
-
   const [foundWords, setFoundWords] = useState([]);
   const [selectedCells, setSelectedCells] = useState([]);
-  const [clues, setClues] = useState(initialClues);
+  const [clues] = useState(initialClues);
   const navigate = useNavigate();
 
-  const createEmptyGrid = () => {
+  const createEmptyGrid = useCallback(() => {
     return Array.from({ length: gridSize }, () =>
       Array.from({ length: gridSize }, () => "")
     );
-  };
+  }, [gridSize]);
 
-  const placeWordsInGrid = (grid) => {
-    clues.forEach((clue) => {
-      const word = clue.word;
-      let placed = false;
-      while (!placed) {
-        const direction = Math.floor(Math.random() * 3); // 0 = horizontal, 1 = vertical, 2 = diagonal
-        const row = Math.floor(Math.random() * gridSize);
-        const col = Math.floor(Math.random() * gridSize);
+  const canPlaceWord = useCallback(
+    (word, row, col, direction, grid) => {
+      if (direction === 0 && col + word.length > gridSize) return false;
+      if (direction === 1 && row + word.length > gridSize) return false;
+      if (
+        direction === 2 &&
+        (row + word.length > gridSize || col + word.length > gridSize)
+      )
+        return false;
 
-        if (canPlaceWord(word, row, col, direction, grid)) {
-          placeWord(word, row, col, direction, grid);
-          placed = true;
+      for (let i = 0; i < word.length; i++) {
+        const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
+        const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
+        if (
+          grid[currentRow][currentCol] !== "" &&
+          grid[currentRow][currentCol] !== word[i]
+        ) {
+          return false;
         }
       }
-    });
-  };
+      return true;
+    },
+    [gridSize]
+  );
 
-  const canPlaceWord = (word, row, col, direction, grid) => {
-    if (direction === 0 && col + word.length > gridSize) return false;
-    if (direction === 1 && row + word.length > gridSize) return false;
-    if (
-      direction === 2 &&
-      (row + word.length > gridSize || col + word.length > gridSize)
-    )
-      return false;
-
-    for (let i = 0; i < word.length; i++) {
-      const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
-      const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
-      if (
-        grid[currentRow][currentCol] !== "" &&
-        grid[currentRow][currentCol] !== word[i]
-      ) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const placeWord = (word, row, col, direction, grid) => {
+  const placeWord = useCallback((word, row, col, direction, grid) => {
     for (let i = 0; i < word.length; i++) {
       const currentRow = row + (direction === 1 || direction === 2 ? i : 0);
       const currentCol = col + (direction === 0 || direction === 2 ? i : 0);
       grid[currentRow][currentCol] = word[i];
     }
-  };
+  }, []);
 
-  const fillGridWithRandomLetters = (grid) => {
-    for (let row = 0; row < gridSize; row++) {
-      for (let col = 0; col < gridSize; col++) {
-        if (grid[row][col] === "") {
-          grid[row][col] = String.fromCharCode(
-            65 + Math.floor(Math.random() * 26)
-          );
+  const placeWordsInGrid = useCallback(
+    (grid) => {
+      clues.forEach((clue) => {
+        const word = clue.word;
+        let placed = false;
+        while (!placed) {
+          const direction = Math.floor(Math.random() * 3); // 0 = horizontal, 1 = vertical, 2 = diagonal
+          const row = Math.floor(Math.random() * gridSize);
+          const col = Math.floor(Math.random() * gridSize);
+
+          if (canPlaceWord(word, row, col, direction, grid)) {
+            placeWord(word, row, col, direction, grid);
+            placed = true;
+          }
+        }
+      });
+    },
+    [clues, gridSize, canPlaceWord, placeWord]
+  );
+
+  const fillGridWithRandomLetters = useCallback(
+    (grid) => {
+      for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+          if (grid[row][col] === "") {
+            grid[row][col] = String.fromCharCode(
+              65 + Math.floor(Math.random() * 26)
+            );
+          }
         }
       }
-    }
-  };
+    },
+    [gridSize]
+  );
 
   useEffect(() => {
     const newGrid = createEmptyGrid();
     placeWordsInGrid(newGrid);
     fillGridWithRandomLetters(newGrid);
     setGrid(newGrid);
-  }, [clues, gridSize]);
+  }, [createEmptyGrid, placeWordsInGrid, fillGridWithRandomLetters]);
 
   const handleCellClick = (row, col) => {
     const cellIndex = selectedCells.findIndex(
@@ -118,10 +126,11 @@ const NggolekiTembang = () => {
     const foundClue = clues.find((clue) => clue.word === selectedWord);
 
     if (foundClue) {
-      setFoundWords([...foundWords, foundClue.word]);
+      setFoundWords((prevWords) => [...prevWords, foundClue.word]);
       setSelectedCells([]);
     }
-  }, [selectedCells]);
+  }, [selectedCells, clues, grid]);
+
   const allWordsFound = foundWords.length === clues.length;
 
   const goToNextPage = () => {
@@ -183,7 +192,6 @@ const NggolekiTembang = () => {
               onClick={goToNextPage}
               className="wordsearch-next-page-button"
             >
-              {" "}
               Lanjut
             </button>
           )}

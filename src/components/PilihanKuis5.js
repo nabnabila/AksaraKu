@@ -76,7 +76,9 @@ const PilihanKuis5 = () => {
                   <a
                     href="/sandhangan/kuis5/utakatikgathuksandhangan"
                     class="btn btn-custom"
-                  ></a>
+                  >
+                    Mulai
+                  </a>
                 </div>
               </div>
             </Card>

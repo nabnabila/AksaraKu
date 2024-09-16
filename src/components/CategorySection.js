@@ -10,17 +10,12 @@ const CategorySection = () => {
     <div className="category">
       <Container>
         <br />
-        <h1></h1>
-        <h2 className="text-center">KATEGORI AKSARA</h2>
+        <h1 className="text-center">KATEGORI AKSARA</h1>
         <br />
         <Row>
           <Col md={4} id="categories">
             <Card className="categoryImage">
-              <Image
-                src={NglegenaImage}
-                alt="Nglegena Image"
-                className="images"
-              />
+              <Image src={NglegenaImage} alt="Nglegena" className="images" />
               <div>
                 <div className="p-2 m-2">
                   <Card.Title className="text-center">

@@ -76,7 +76,9 @@ const PilihanKuis2 = () => {
                   <a
                     href="/pasanganaksaranglegena/kuis2/utakatikgathukpasangannglegena"
                     class="btn btn-custom"
-                  ></a>
+                  >
+                    Mulai
+                  </a>
                 </div>
               </div>
             </Card>
