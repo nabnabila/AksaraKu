@@ -136,7 +136,7 @@ const PilihanKuis1 = () => {
               <a href="/aksaranglegena">
                 <i
                   className="bi bi-arrow-left"
-                  style={{ fontSize: "190px", color: "white" }}
+                  style={{ fontSize: "160px", color: "white" }}
                 ></i>{" "}
               </a>
               <div>

@@ -23,7 +23,7 @@
 }
 
 .image-clue-image {
-  max-width: 300px;
+  max-width: 350px;
   margin-bottom: 30px;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,24 +32,23 @@
 
 .option.image-container {
   display: flex;
-  align-items: center !important;
-  justify-content: center !important;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  gap: 20px;
+  gap: 10px;
   margin: 10px auto;
 }
 
 .option-image-container img {
-  width: 200px;
-  height: 200px;
-  border-radius: inherit;
-  flex-shrink: 0;
+  width: 250px !important;
+  height: 250px !important;
+  border-radius: 10px;
+  border: solid #333;
+  transition: transform 0.3s ease;
 }
 
 .option-image-container img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .feedback-message {

@@ -52,22 +52,25 @@ const NyocokakeGambar = ({ nextPagePath }) => {
         <h2 className="image-clue-container-header1">
           Pilih gambar sing cocog karo aksara
         </h2>
+
         <img
           src={currentPair.clueImage}
           alt="Clue"
           className="image-clue-image"
         />
-        <div className="option-image-container">
+        <div className="option image-container">
           {currentPair.options.map((option) => (
-            <img
-              key={option.id}
-              src={option.image}
-              alt="Option"
-              className={selectedImage === option.id ? "selected" : ""}
-              onClick={() => handleImageClick(option)}
-            />
+            <div key={option.id} className="option-image-container">
+              <img
+                src={option.image}
+                alt="Option"
+                className={selectedImage === option.id ? "selected" : ""}
+                onClick={() => handleImageClick(option)}
+              />
+            </div>
           ))}
         </div>
+
         {isAnswerCorrect !== null && (
           <div>
             <p
